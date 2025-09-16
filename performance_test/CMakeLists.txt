@@ -15,6 +15,7 @@ find_package(rclcpp REQUIRED)
 find_package(rclcpp_action REQUIRED)
 find_package(performance_metrics REQUIRED)
 find_package(performance_test_msgs REQUIRED)
+find_package(cm_executors REQUIRED)
 
 set(LIBRARY_DEPENDENCIES
   rclcpp
@@ -37,6 +38,12 @@ add_library(${LIBRARY_NAME} SHARED ${LIBRARY_SRC})
 target_include_directories(${LIBRARY_NAME} PUBLIC
   include
 )
+
+target_link_libraries(
+    ${PROJECT_NAME}
+    cm_executors::cm_executors
+)
+
 ament_target_dependencies(${LIBRARY_NAME} ${LIBRARY_DEPENDENCIES})
 
 install(TARGETS

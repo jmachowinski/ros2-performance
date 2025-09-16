@@ -32,6 +32,8 @@ enum class ExecutorType
   SINGLE_THREADED_EXECUTOR = 1,
   EVENTS_EXECUTOR = 2,
   MULTI_THREAD_EXECUTOR = 3,
+  CBG_EXECUTOR = 4,
+  CBG_EXECUTOR_MULTI = 5,
 };
 
 enum class SpinType

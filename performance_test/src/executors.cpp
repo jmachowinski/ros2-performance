@@ -14,6 +14,7 @@
 #include <string>
 
 #include "performance_test/executors.hpp"
+#include <cm_executors/events_cbg_executor.hpp>
 
 namespace performance_test
 {
@@ -30,6 +31,12 @@ std::ostream & operator<<(std::ostream & os, const ExecutorType & t)
       break;
     case ExecutorType::MULTI_THREAD_EXECUTOR:
       executor_name = "MultiThreadedExecutor";
+      break;
+    case ExecutorType::CBG_EXECUTOR:
+      executor_name = "CbgExecutor";
+      break;
+    case ExecutorType::CBG_EXECUTOR_MULTI:
+      executor_name = "CbgExecutorMultihthread";
       break;
   }
 
@@ -49,6 +56,12 @@ std::shared_ptr<rclcpp::Executor> make_executor(ExecutorType type)
       break;
     case ExecutorType::MULTI_THREAD_EXECUTOR:
       executor = std::make_shared<rclcpp::executors::MultiThreadedExecutor>();
+      break;
+    case ExecutorType::CBG_EXECUTOR:
+      executor = std::make_shared<rclcpp::executors::EventsCBGExecutor>(rclcpp::ExecutorOptions(), 1);
+      break;
+    case ExecutorType::CBG_EXECUTOR_MULTI:
+      executor = std::make_shared<rclcpp::executors::EventsCBGExecutor>();
       break;
   }
 
